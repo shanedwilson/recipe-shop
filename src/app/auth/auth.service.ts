@@ -32,7 +32,7 @@ export class AuthService {
 
     login(email: string, password: string) {
        return this.http.post<AuthResponseData>(
-           'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + AppSettings.firebaseKey,
+           'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + AppSettings.firebaseKey,
             {
                 email,
                 password,
@@ -50,6 +50,13 @@ export class AuthService {
         switch (errorRes.error.error.message) {
             case 'EMAIL_EXISTS':
                 errorMessage = 'This email already exists.';
+                break;
+            case 'EMAIL_NOT_FOUND':
+                errorMessage = 'This email does not exist.';
+                break;
+            case 'INVALID_PASSWORD':
+                errorMessage = 'Incorrect Password.';
+                break;
         }
         return throwError(errorMessage);
     }
