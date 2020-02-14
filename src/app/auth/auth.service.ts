@@ -24,7 +24,11 @@ export class AuthService {
     // user = new BehaviorSubject<User>(null);
     private tokenExperationTime: any;
 
-    constructor(private http: HttpClient, private router: Router, private store: Store<fromApp.AppState>) {}
+    constructor(
+        private http: HttpClient,
+        private router: Router,
+        private store: Store<fromApp.AppState>
+        ) {}
 
     signup(email: string, password: string) {
         return this.http.post<AuthResponseData>(
